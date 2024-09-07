@@ -1,0 +1,156 @@
+/* 
+.services-container {
+    display: flex;
+    align-items: center;
+    justify-content: center; 
+    flex-wrap: wrap; 
+    gap: 25px; 
+    padding: 60px; 
+    background-color:#0C0C0C;
+  }
+  
+  .service.card {
+    background-color: #fff;
+    border-radius: 8px; 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden; 
+    width: 30%; 
+    max-width: 300px; 
+    transition: transform 0.3s, box-shadow 0.3s; 
+  }
+  
+  .service.card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); 
+  }
+  
+  .service-card-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+  }
+  
+  .service-card-content img {
+    width: 100%; 
+    height: auto; 
+    border-bottom: 1px solid #e0e0e0;
+  }
+  
+  .service-card-description {
+    text-align: center; 
+    margin: 10px 0; 
+  }
+  
+  .service-card-heading {
+    font-size: 1.25rem;
+    margin-bottom: 10px; 
+    color: #DCCA87;
+  }
+  
+  .service-card-info {
+    font-size: 1rem; 
+    color: #545454; 
+  }
+  
+  .manage-button {
+    background-color: #F5EFDB;
+    color: #545454;
+    border: none;
+    border-radius: 4px;
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+  
+  .manage-button:hover {
+    background-color: #eee4c5;
+  } */
+
+/* Services.css */
+:root {
+    --font-base: 'Cormorant Upright', serif;
+    --font-alt: 'Open Sans', sans-serif;
+    
+    --color-golden: #DCCA87;
+    --color-black: #0C0C0C;
+    --color-gray: #545454;
+    --color-crimson: #F5EFDB;
+    --color-grey: #AAAAAA;
+    --color-white: #FFFFFF;
+  }
+  
+  .services-container {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 20px;
+    padding: 40px; /* Increased padding for better spacing */
+    background-color: var(--color-black); /* Black background for the container */
+  }
+  
+  .service.card {
+    background-color: var(--color-white); /* White background for the card */
+    border-radius: 12px; /* Rounded corners for a modern look */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* Enhanced shadow for depth */
+    overflow: hidden;
+    width: calc(33.333% - 20px); /* Adjust width to fit three cards per row with space between */
+    max-width: 350px; /* Increase max-width for larger cards */
+    transition: transform 0.3s, box-shadow 0.3s, background-color 0.3s; /* Smooth transitions */
+  }
+  
+  .service.card:hover {
+    transform: translateY(-12px); /* Slightly higher lift on hover */
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3); /* More pronounced shadow on hover */
+    background-color: var(--color-golden); /* Change background color on hover */
+  }
+  
+  .service-card-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+  }
+  
+  .service-card-content img {
+    width: 100%;
+    height: auto;
+    border-bottom: 2px solid var(--color-gray); /* Thicker border for better separation */
+  }
+  
+  .service-card-description {
+    text-align: center;
+    margin: 15px 0; /* Increased margin for better spacing */
+  }
+  
+  .service-card-heading {
+    font-size: 1.5rem; /* Larger heading for better emphasis */
+    margin-bottom: 10px;
+    color: var(--color-black); /* Dark color for better readability */
+    font-family: var(--font-base); /* Font for the heading */
+  }
+  
+  .service-card-info {
+    font-size: 1.1rem; /* Slightly larger font size for better readability */
+    color: var(--color-gray); /* Medium gray for text color */
+    font-family: var(--font-alt); /* Font for the info text */
+  }
+  
+  .manage-button {
+    background-color: var(--color-golden); /* Golden background for the button */
+    color: var(--color-black); /* Black text color for contrast */
+    border: none;
+    border-radius: 6px; /* Rounded corners for the button */
+    padding: 12px 24px; /* Increased padding for a better look */
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s; /* Smooth transitions */
+    font-family: var(--font-alt); /* Font for the button */
+  }
+  
+  .manage-button:hover {
+    background-color: #c1a76c; /* Slightly darker golden for hover effect */
+    transform: scale(1.05); /* Slightly enlarge the button on hover */
+  }
+  
+  
+  

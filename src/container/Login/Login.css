@@ -1,0 +1,112 @@
+
+.container {
+    display: flex;
+    height: auto; 
+    min-height: 100vh; 
+    overflow: hidden;
+}
+
+.login-left-side {
+    flex: 1;
+    background-color: #e0f2f1; 
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.left-side-content-container {
+    text-align: center;
+}
+
+.site-info {
+    margin-bottom: 20px;
+}
+
+.title {
+    font-size: 2em;
+    color: #00796b; 
+    margin-bottom: 10px;
+}
+
+.description {
+    font-size: 1.2em;
+    color: #004d40;
+    margin-bottom: 20px;
+}
+
+.logo-img {
+    max-width: 150px; 
+    height: auto;
+    margin-top: 20px;
+}
+
+.footer {
+    margin-top: 20px;
+}
+
+.footer-text {
+    font-size: 0.9em;
+    color: #004d40; 
+}
+
+.login-right-side {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #ffffff;
+    padding: 20px;
+}
+
+.right-side-content-container {
+    width: 100%;
+    max-width: 400px;
+}
+
+.login-form {
+    width: 100%;
+}
+
+.ant-form-item-label {
+    padding: 0 0 8px;
+    font-weight: bold;
+}
+
+.ant-form-item-control-input {
+    width: 100%;
+}
+
+.ant-input,
+.ant-input-password {
+    border: 1px solid #b2dfdb; 
+    border-radius: 4px; 
+}
+
+.ant-input:hover,
+.ant-input-password:hover,
+.ant-input:focus,
+.ant-input-password:focus {
+    border-color: #00796b; 
+    box-shadow: 0 0 0 2px rgba(0, 121, 107, 0.2); 
+}
+
+.ant-btn-primary {
+    background-color: #00796b; 
+    border-color: #00796b; 
+    width: 100%;
+}
+
+.ant-btn-primary:hover,
+.ant-btn-primary:focus {
+    background-color: #004d40; 
+    border-color: #004d40; 
+}
+
+.ant-checkbox-wrapper {
+    font-size: 0.9em;
+}
+
+
+
