@@ -12,7 +12,7 @@ const Restaurants = () => {
     useEffect(() => {
         const fetchRestaurants = async () => {
             try {
-                const response = await fetch('http://localhost:8080/api/all/restaurants');
+                const response = await fetch('http://localhost:8081/api/all/restaurants');
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
                 }
@@ -29,7 +29,7 @@ const Restaurants = () => {
     const fetchMenu = async (restaurantId) => {
         setLoading(true);
         try {
-            const response = await fetch(`http://localhost:8080/api/menu/restaurant/${restaurantId}`);
+            const response = await fetch(`http://localhost:8081/api/menu/restaurant/${restaurantId}`);
             if (!response.ok) {
                 throw new Error(`Network response was not ok. Status: ${response.status}`);
             }
@@ -60,7 +60,7 @@ const Restaurants = () => {
     };
 
     const logoImagePath = (logoImage) =>
-        logoImage ? `http://localhost:8080/${logoImage.replace(/\\/g, '/')}` : 'https://via.placeholder.com/150';
+        logoImage ? `http://localhost:8081/${logoImage.replace(/\\/g, '/')}` : 'https://via.placeholder.com/150';
 
     return (
         <div className="all-restaurants-container">
@@ -101,7 +101,7 @@ const Restaurants = () => {
                             <h3>Menu</h3>
                             <div className="menu-items-container">
                                 {menu.map((item) => {
-                                    const imageUrl = item.Image ? `http://localhost:8080/${item.Image.replace(/\\/g, '/')}` : 'https://via.placeholder.com/100';
+                                    const imageUrl = item.Image ? `http://localhost:8081/${item.Image.replace(/\\/g, '/')}` : 'https://via.placeholder.com/100';
                                     return (
                                         <div className="menu-item" key={item.id}>
                                             <div className="menu-item-img">

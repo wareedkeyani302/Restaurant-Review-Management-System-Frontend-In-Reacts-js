@@ -1,16 +1,18 @@
 import React from 'react';
 import { Button, Checkbox, Form, Input, message } from 'antd';
 import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../Authentication/AuthContext';
 import './Login.css';
 import restaurant from '../../assets/restaurant.png';
 
 const Login = () => {
-    const navigate = useNavigate('');
+    const {login} = useAuth();
+    const navigate = useNavigate();
     const handleSubmit = async (values) => {
         const { email, password } = values;
 
         try {
-            const response = await fetch('http://localhost:8080/api/login', {
+            const response = await fetch('http://localhost:8081/api/login', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -23,13 +25,15 @@ const Login = () => {
             }
 
             const data = await response.json();
-            
-            // Assuming the response contains a token and user information
-            const {user } = data;
-
-            localStorage.setItem('user', JSON.stringify(user));
-            message.success('Login successful!');
-            navigate('/restaurants');
+            if (data) {
+                console.log('User Data:', data);
+                login(data);
+                message.success('Login successful!');
+                navigate('/restaurants');
+            } else {
+                console.error('No user data found in response:', data);
+                message.error('Login failed! User data not found.');
+            }
         } catch (error) {
             console.error('Error:', error);
             message.error('Login failed! Please check your credentials.');
@@ -67,7 +71,7 @@ const Login = () => {
                             initialValues={{
                                 remember: true,
                             }}
-                            onFinish={handleSubmit} 
+                            onFinish={handleSubmit}
                             autoComplete="off"
                         >
                             <Form.Item

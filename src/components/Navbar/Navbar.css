@@ -103,6 +103,28 @@
   color: var(--color-white);
 }
 
+.logout-button {
+  background-color: #ff4d4d; 
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  margin: 0 1rem;
+}
+
+.logout-button:hover {
+  background-color: #e60000; 
+  transform: scale(1.05); 
+}
+
+.logout-button:focus {
+  outline: 2px solid #fff; 
+  outline-offset: 2px;
+}
+
 @media screen and (min-width: 2000px) {
   .app__navbar-logo img {
       width: 210px;
