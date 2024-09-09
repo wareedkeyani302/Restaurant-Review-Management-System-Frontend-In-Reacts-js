@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import MenuModal from '../../components/MenuModal/MenuModal'; 
+import MenuModal from '../../components/MenuModal/MenuModal';
 import './Restaurants.css';
 
 const Restaurants = () => {
@@ -9,8 +8,6 @@ const Restaurants = () => {
     const [menu, setMenu] = useState([]);
     const [modalOpen, setModalOpen] = useState(false);
     const [loading, setLoading] = useState(false);
-
-    const navigate = useNavigate();
 
     useEffect(() => {
         const fetchRestaurants = async () => {
@@ -34,7 +31,7 @@ const Restaurants = () => {
         try {
             const response = await fetch(`http://localhost:8080/api/menu/restaurant/${restaurantId}`);
             if (!response.ok) {
-                throw new Error('Network response was not ok');
+                throw new Error(`Network response was not ok. Status: ${response.status}`);
             }
             const data = await response.json();
             setMenu(data);
@@ -46,6 +43,7 @@ const Restaurants = () => {
     };
 
     const handleClick = (restaurant) => {
+        console.log('Selected restaurant ID:', restaurant.id);
         setSelectedRestaurant(restaurant);
         fetchMenu(restaurant.id);
         setModalOpen(true);
@@ -53,10 +51,12 @@ const Restaurants = () => {
 
     const handleOk = () => {
         setModalOpen(false);
+        setMenu('');
     };
 
     const handleCancel = () => {
         setModalOpen(false);
+        setMenu('');
     };
 
     const logoImagePath = (logoImage) =>
@@ -66,9 +66,9 @@ const Restaurants = () => {
         <div className="all-restaurants-container">
             {restaurants.length > 0 ? (
                 restaurants.map((restaurant) => (
-                    <div 
-                        className="restaurant-card" 
-                        key={restaurant.id} 
+                    <div
+                        className="restaurant-card"
+                        key={restaurant.id}
                         onClick={() => handleClick(restaurant)}
                     >
                         <div className="restaurant-card-img">
