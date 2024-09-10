@@ -1,13 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import MenuModal from '../../components/MenuModal/MenuModal';
 import './Restaurants.css';
+import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../Authentication/AuthContext';
 
 const Restaurants = () => {
     const [restaurants, setRestaurants] = useState([]);
     const [selectedRestaurant, setSelectedRestaurant] = useState(null);
     const [menu, setMenu] = useState([]);
-    const [modalOpen, setModalOpen] = useState(false);
     const [loading, setLoading] = useState(false);
+    const [modalOpen, setModalOpen] = useState(false);
+    const navigate = useNavigate();
+    const { user } = useAuth();
 
     useEffect(() => {
         const fetchRestaurants = async () => {
@@ -29,12 +33,24 @@ const Restaurants = () => {
     const fetchMenu = async (restaurantId) => {
         setLoading(true);
         try {
-            const response = await fetch(`http://192.168.3.178:8081/api/menu/restaurant/${restaurantId}`);
-            if (!response.ok) {
-                throw new Error(`Network response was not ok. Status: ${response.status}`);
+            if (user) {
+                const userMenuResponse = await fetch(`http://192.168.3.178:8081/api/restaurant/${restaurantId}/user/${user.user_id}/menu`);
+                
+                if (userMenuResponse.ok) {
+                    const userMenuData = await userMenuResponse.json();
+                    if (userMenuData.length > 0) {
+                        setMenu(userMenuData);
+                        return;
+                    }
+                }
             }
-            const data = await response.json();
-            setMenu(data);
+            
+            const defaultMenuResponse = await fetch(`http://192.168.3.178:8081/api/menu/restaurant/${restaurantId}`);
+            if (!defaultMenuResponse.ok) {
+                throw new Error(`Network response was not ok. Status: ${defaultMenuResponse.status}`);
+            }
+            const defaultMenuData = await defaultMenuResponse.json();
+            setMenu(defaultMenuData);
         } catch (error) {
             console.error('Failed to fetch menu:', error);
         } finally {
@@ -43,7 +59,6 @@ const Restaurants = () => {
     };
 
     const handleClick = (restaurant) => {
-        console.log('Selected restaurant ID:', restaurant.id);
         setSelectedRestaurant(restaurant);
         fetchMenu(restaurant.id);
         setModalOpen(true);
@@ -51,12 +66,20 @@ const Restaurants = () => {
 
     const handleOk = () => {
         setModalOpen(false);
-        setMenu('');
+        setMenu([]);
     };
 
     const handleCancel = () => {
         setModalOpen(false);
-        setMenu('');
+        setMenu([]);
+    };
+
+    const handleFeedback = () => {
+        if (!user) {
+            console.error('User not authenticated');
+            return;
+        }
+        navigate('/feedback', { state: { menuItems: menu, userId: user.user_id } });
     };
 
     const logoImagePath = (logoImage) =>
@@ -92,6 +115,7 @@ const Restaurants = () => {
                     title={selectedRestaurant.Name}
                     onOk={handleOk}
                     onCancel={handleCancel}
+                    handleFeedback={handleFeedback}
                     loading={loading}
                 >
                     {loading ? (

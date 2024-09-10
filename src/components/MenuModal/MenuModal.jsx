@@ -2,7 +2,7 @@ import React from 'react';
 import { Modal, Button } from 'antd';
 import './MenuModal.css';
 
-const MenuModal = ({ open, onCancel, onOk, title, children, mask = true, maskClosable = true, width = 800 }) => {
+const MenuModal = ({ open, onCancel, onOk, handleFeedback, title, children, mask = true, maskClosable = true, width = 800 }) => {
   return (
     <Modal
       title={title}
@@ -13,12 +13,17 @@ const MenuModal = ({ open, onCancel, onOk, title, children, mask = true, maskClo
       maskClosable={maskClosable}
       width={width}
       footer={[
+        <>
         <Button key="cancel" onClick={onCancel}>
           Cancel
-        </Button>,
+        </Button>
         <Button key="ok" type="primary" onClick={onOk}>
           OK
         </Button>
+        <Button key="feedback" type="feedback" onClick={handleFeedback}>
+            Add Feedback
+        </Button>
+        </>
       ]}
       className="custom-modal"
     >

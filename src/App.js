@@ -10,6 +10,7 @@ import Restaurants from './container/AllRestaurants/Restaurants';
 import Contact from './container/Contact/Contact';
 import { useAuth } from './container/Authentication/AuthContext';
 import PrivateRoute from './container/Authentication/PrivateRoute';
+import Feedback from './container/Feedback/Feedback';
 
 const App = () => {
   const location = useLocation();
@@ -35,6 +36,10 @@ const App = () => {
         <Route
           path="/restaurants"
           element={<PrivateRoute element={<Restaurants />} />}
+        />
+        <Route
+          path="/feedback"
+          element={<PrivateRoute element={<Feedback />} />}
         />
         <Route
           path="/contact"

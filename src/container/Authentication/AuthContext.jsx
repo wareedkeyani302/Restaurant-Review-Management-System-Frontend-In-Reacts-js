@@ -4,6 +4,7 @@ const AuthContext = createContext();
 
 const AuthProvider = ({ children }) => {
     const storedUser = JSON.parse(localStorage.getItem('user'));
+    // console.log('Stored User:', storedUser);
     const [user, setUser] = useState(storedUser || null);
 
     const login = (userData) => {
