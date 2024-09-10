@@ -14,7 +14,7 @@ const RestaurantsCard = ({ restaurants }) => {
       {displayedRestaurants.length > 0 ? (
         displayedRestaurants.map((restaurant) => {
           const logoImagePath = restaurant?.Logo_image
-            ? `http://localhost:8081/${restaurant.Logo_image.replace(/\\/g, '/')}`
+            ? `http://192.168.3.178:8081/${restaurant.Logo_image.replace(/\\/g, '/')}`
             : 'https://via.placeholder.com/150'; 
 
           return (

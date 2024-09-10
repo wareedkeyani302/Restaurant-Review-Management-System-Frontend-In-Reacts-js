@@ -11,7 +11,7 @@ const Home = () => {
   useEffect(() => {
     const fetchRestaurants = async () => {
       try {
-        const response = await fetch('http://localhost:8081/api/all/restaurants');
+        const response = await fetch('http://192.168.3.178:8081/api/all/restaurants');
         if (!response.ok) {
           throw new Error('Network response was not ok');
         }

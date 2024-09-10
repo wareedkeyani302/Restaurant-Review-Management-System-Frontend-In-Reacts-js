@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Button, Checkbox, Form, Input, message } from 'antd';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../Authentication/AuthContext';
@@ -6,13 +6,19 @@ import './Login.css';
 import restaurant from '../../assets/restaurant.png';
 
 const Login = () => {
-    const {login} = useAuth();
+    const { user } = useAuth();
+    const { login } = useAuth();
     const navigate = useNavigate();
+    useEffect(() => {
+        if (user) {
+            navigate('/restaurants');
+        }
+    }, [user, navigate]);
     const handleSubmit = async (values) => {
         const { email, password } = values;
 
         try {
-            const response = await fetch('http://localhost:8081/api/login', {
+            const response = await fetch('http://192.168.3.178:8081/api/login', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
