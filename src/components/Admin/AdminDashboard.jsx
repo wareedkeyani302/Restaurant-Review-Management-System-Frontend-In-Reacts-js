@@ -11,7 +11,7 @@ const AdminDashboard = () => {
             <nav className="admin-nav">
                 <ul>
                     <li><Link to="restaurants">Manage Restaurants</Link></li>
-                    <li><Link to="menu/1">Manage Menu Items</Link></li> 
+                    {/* <li><Link to="menu/1">Manage Menu Items</Link></li>  */}
                     <li><Link to="users">Manage Users</Link></li>
                 </ul>
             </nav>

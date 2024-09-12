@@ -3,7 +3,7 @@ import './ManageUsers.css';
 
 const ManageUsers = () => {
     const [users, setUsers] = useState([]);
-    const [newUser, setNewUser] = useState({ username: '', email: '', role: '' });
+    const [newUser, setNewUser] = useState({ username: '', email: '', role: '', password: '' });
     const [editUser, setEditUser] = useState(null);
     const [loading, setLoading] = useState(false);
 
@@ -28,7 +28,7 @@ const ManageUsers = () => {
 
     const handleAddUser = async () => {
         try {
-            const response = await fetch('http://192.168.3.178:8081/api/add/user', {
+            const response = await fetch('http://192.168.3.178:8081/api/signup', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(newUser),
@@ -36,64 +36,89 @@ const ManageUsers = () => {
             if (response.ok) {
                 const data = await response.json();
                 setUsers([...users, data]);
-                setNewUser({ username: '', email: '', role: '' });
+                setNewUser({ username: '', email: '', role: '', password: '' });
             }
         } catch (error) {
             console.error('Failed to add user:', error);
         }
     };
 
-    const handleUpdateUser = async (id) => {
-        try {
-            const response = await fetch(`http://192.168.3.178:8081/api/update/user/${id}`, {
-                method: 'PUT',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(editUser),
-            });
-            if (response.ok) {
-                const updatedUser = await response.json();
-                setUsers(users.map(user => (user.id === id ? updatedUser : user)));
-                setEditUser(null);
+    const handleUpdateUser = async () => {
+        if (editUser) {
+            try {
+                const response = await fetch(`http://localhost:8081/api/User/${editUser.user_id}`, {
+                    method: 'PUT',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(editUser),
+                });
+                if (response.ok) {
+                    const updatedUser = await response.json();
+                    setUsers(users.map(user => (user.user_id === updatedUser.user_id ? updatedUser : user)));
+                    setEditUser(null);
+                }
+            } catch (error) {
+                console.error('Failed to update user:', error);
             }
-        } catch (error) {
-            console.error('Failed to update user:', error);
         }
     };
 
-    const handleDeleteUser = async (id) => {
+    const handleDeleteUser = async (userId) => {
         try {
-            await fetch(`http://192.168.3.178:8081/api/delete/user/${id}`, {
+            const response = await fetch(`http://localhost:8081/api/User/${userId}`, {
                 method: 'DELETE',
             });
-            setUsers(users.filter(user => user.id !== id));
+            if (response.ok) {
+                setUsers(users.filter(user => user.user_id !== userId));
+            }
         } catch (error) {
             console.error('Failed to delete user:', error);
         }
     };
+    const handlCancel = () => {
+        setEditUser(null);
+    }
 
     return (
         <div className="manage-users">
             <h2>Manage Users</h2>
             <div className="add-user">
                 <h3>Add User</h3>
-                <input
-                    type="text"
-                    placeholder="Username"
-                    value={newUser.username}
-                    onChange={(e) => setNewUser({ ...newUser, username: e.target.value })}
-                />
-                <input
-                    type="email"
-                    placeholder="Email"
-                    value={newUser.email}
-                    onChange={(e) => setNewUser({ ...newUser, email: e.target.value })}
-                />
-                <input
-                    type="text"
-                    placeholder="Role"
-                    value={newUser.role}
-                    onChange={(e) => setNewUser({ ...newUser, role: e.target.value })}
-                />
+                <div className='form_item'>
+                    <label htmlFor='Username'>Username:</label>
+                    <input
+                        type="text"
+                        placeholder="Username"
+                        value={newUser.username}
+                        onChange={(e) => setNewUser({ ...newUser, username: e.target.value })}
+                    />
+                </div>
+                <div className='form_item'>
+                    <label htmlFor='email'>Email:</label>
+                    <input
+                        type="email"
+                        placeholder="Email"
+                        value={newUser.email}
+                        onChange={(e) => setNewUser({ ...newUser, email: e.target.value })}
+                    />
+                </div>
+                <div className='form_item'>
+                    <label htmlFor='userRole'>Role:</label>
+                    <input
+                        type="text"
+                        placeholder="Role"
+                        value={newUser.role}
+                        onChange={(e) => setNewUser({ ...newUser, role: e.target.value })}
+                    />
+                </div>
+                <div className='form_item'>
+                    <label htmlFor='Password'>Password:</label>
+                    <input
+                        type='password'
+                        placeholder='Enter Password'
+                        value={newUser.password}
+                        onChange={(e) => setNewUser({ ...newUser, password: e.target.value })}
+                    />
+                </div>
                 <button onClick={handleAddUser}>Add User</button>
             </div>
             <div className="users-list">
@@ -102,12 +127,14 @@ const ManageUsers = () => {
                     <p>Loading...</p>
                 ) : (
                     users.map(user => (
-                        <div key={user.id} className="user">
+                        <div key={user.user_id} className="user">
                             <h4>{user.username}</h4>
                             <p>{user.email}</p>
                             <p>Role: {user.role}</p>
+                            <div>
                             <button onClick={() => setEditUser(user)}>Edit</button>
-                            <button onClick={() => handleDeleteUser(user.id)}>Delete</button>
+                            <button onClick={() => handleDeleteUser(user.user_id)}>Delete</button>
+                            </div>
                         </div>
                     ))
                 )}
@@ -130,7 +157,10 @@ const ManageUsers = () => {
                         value={editUser.role}
                         onChange={(e) => setEditUser({ ...editUser, role: e.target.value })}
                     />
-                    <button onClick={() => handleUpdateUser(editUser.id)}>Save Changes</button>
+                    <div>
+                    <button onClick={handleUpdateUser}>Save Changes</button>
+                    <button onClick={handlCancel}>Cancel</button>
+                    </div>
                 </div>
             )}
         </div>
@@ -138,3 +168,4 @@ const ManageUsers = () => {
 };
 
 export default ManageUsers;
+

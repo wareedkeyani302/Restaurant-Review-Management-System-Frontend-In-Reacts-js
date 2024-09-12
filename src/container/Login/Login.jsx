@@ -13,7 +13,7 @@ const Login = () => {
         if (user) {
             // Redirect based on user role
             if (user.role === 'admin') {
-                navigate('/admin');
+                navigate('/admin/restaurants');
             } else {
                 navigate('/restaurants');
             }
@@ -88,7 +88,7 @@ const Login = () => {
                                 name="email"
                                 rules={[{ required: true, message: 'Please input your valid Email!' }]}
                             >
-                                <Input />
+                                <Input type='email' className='email-field' />
                             </Form.Item>
 
                             <Form.Item

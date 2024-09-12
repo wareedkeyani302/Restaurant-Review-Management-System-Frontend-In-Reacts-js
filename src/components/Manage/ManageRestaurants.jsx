@@ -4,7 +4,7 @@ import './ManageRestaurants.css';
 
 const ManageRestaurants = () => {
     const [restaurants, setRestaurants] = useState([]);
-    const [newRestaurant, setNewRestaurant] = useState({ name: '', address: '', phone: '', email: '', logo: '' });
+    const [newRestaurant, setNewRestaurant] = useState({ Name: '', Address: '', Phone: '', Email: '', Logo_image: null });
     const [editRestaurant, setEditRestaurant] = useState(null);
     const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
@@ -29,16 +29,24 @@ const ManageRestaurants = () => {
     }, []);
 
     const handleAddRestaurant = async () => {
+        const formData = new FormData();
+        formData.append('Name', newRestaurant.Name);
+        formData.append('Address', newRestaurant.Address);
+        formData.append('Phone', newRestaurant.Phone);
+        formData.append('Email', newRestaurant.Email);
+        if (newRestaurant.Logo_image) {
+            formData.append('Logo_image', newRestaurant.Logo_image);
+        }
+
         try {
             const response = await fetch('http://192.168.3.178:8081/api/add', {
                 method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(newRestaurant),
+                body: formData,
             });
             if (response.ok) {
                 const data = await response.json();
                 setRestaurants([...restaurants, data]);
-                setNewRestaurant({ name: '', address: '', phone: '', email: '', logo: '' });
+                setNewRestaurant({ Name: '', Address: '', Phone: '', Email: '', Logo_image: null });
             }
         } catch (error) {
             console.error('Failed to add restaurant:', error);
@@ -46,11 +54,19 @@ const ManageRestaurants = () => {
     };
 
     const handleUpdateRestaurant = async (id) => {
+        const formData = new FormData();
+        formData.append('Name', editRestaurant.Name);
+        formData.append('Address', editRestaurant.Address);
+        formData.append('Phone', editRestaurant.Phone);
+        formData.append('Email', editRestaurant.Email);
+        if (editRestaurant.Logo_image) {
+            formData.append('Logo_image', editRestaurant.Logo_image);
+        }
+
         try {
             const response = await fetch(`http://192.168.3.178:8081/api/restaurant/${id}`, {
                 method: 'PUT',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(editRestaurant),
+                body: formData,
             });
             if (response.ok) {
                 const updatedRestaurant = await response.json();
@@ -73,36 +89,45 @@ const ManageRestaurants = () => {
         }
     };
 
+    const getImageUrl = (path) => {
+        if (!path) return ''; // Return an empty string or a default image URL
+        return `http://192.168.3.178:8081/${path.replace(/\\/g, '/')}`;
+    };
+
+    const handleCancel = () => {
+        setEditRestaurant(null);
+    };
+
     return (
         <div className="manage-restaurants">
             <h2>Manage Restaurants</h2>
             <div className="add-restaurant">
                 <h3>Add Restaurant</h3>
                 <div className='form-item'>
-                    <label htmlFor='Restaurant Name'>Restaurant Name:</label>
+                    <label htmlFor='Name'>Restaurant Name:</label>
                     <input
                         type="text"
                         placeholder="Name"
-                        value={newRestaurant.name}
-                        onChange={(e) => setNewRestaurant({ ...newRestaurant, name: e.target.value })}
+                        value={newRestaurant.Name}
+                        onChange={(e) => setNewRestaurant({ ...newRestaurant, Name: e.target.value })}
                     />
                 </div>
                 <div className='form-item'>
-                    <label htmlFor='Address' >Address:</label>
+                    <label htmlFor='Address'>Address:</label>
                     <input
                         type="text"
                         placeholder="Address"
-                        value={newRestaurant.address}
-                        onChange={(e) => setNewRestaurant({ ...newRestaurant, address: e.target.value })}
+                        value={newRestaurant.Address}
+                        onChange={(e) => setNewRestaurant({ ...newRestaurant, Address: e.target.value })}
                     />
                 </div>
                 <div className='form-item'>
                     <label htmlFor='Phone'>Phone:</label>
                     <input
-                        type="number"
+                        type="text"
                         placeholder="Phone"
-                        value={newRestaurant.phone}
-                        onChange={(e) => setNewRestaurant({ ...newRestaurant, phone: e.target.value })}
+                        value={newRestaurant.Phone}
+                        onChange={(e) => setNewRestaurant({ ...newRestaurant, Phone: e.target.value })}
                     />
                 </div>
                 <div className='form-item'>
@@ -110,17 +135,15 @@ const ManageRestaurants = () => {
                     <input
                         type="email"
                         placeholder="Email"
-                        value={newRestaurant.email}
-                        onChange={(e) => setNewRestaurant({ ...newRestaurant, email: e.target.value })}
+                        value={newRestaurant.Email}
+                        onChange={(e) => setNewRestaurant({ ...newRestaurant, Email: e.target.value })}
                     />
                 </div>
                 <div className='form-item'>
-                    <label htmlFor="Logo">Logo:</label>
+                    <label htmlFor="Logo_image">Logo Image:</label>
                     <input
                         type="file"
-                        placeholder="Upload Restaurant Logo Image"
-                        value={newRestaurant.logo}
-                        onChange={(e) => setNewRestaurant({ ...newRestaurant, logo: e.target.value })}
+                        onChange={(e) => setNewRestaurant({ ...newRestaurant, Logo_image: e.target.files[0] })}
                     />
                 </div>
                 <button onClick={handleAddRestaurant}>Add Restaurant</button>
@@ -130,64 +153,70 @@ const ManageRestaurants = () => {
                 {loading ? (
                     <p>Loading...</p>
                 ) : (
-                    restaurants.map(restaurant => (
-                        <div key={restaurant.id} className="restaurant">
-                            <h4>{restaurant.name}</h4>
-                            <p>{restaurant.address}</p>
-                            <p>{restaurant.phone}</p>
-                            <p>{restaurant.email}</p>
-                            <img src={restaurant.logo} alt={restaurant.name} />
-                            <button onClick={() => setEditRestaurant(restaurant)}>Edit</button>
-                            <button onClick={() => handleDeleteRestaurant(restaurant.id)}>Delete</button>
-                            <button onClick={() => navigate(`/admin/menu/${restaurant.id}`)}>Manage Menu</button>
-                        </div>
-                    ))
+                    <div className="restaurants-grid">
+                        {restaurants.map(restaurant => (
+                            <div key={restaurant.id} className="restaurant">
+                                <img src={getImageUrl(restaurant.Logo_image)} alt={restaurant.Name} />
+                                <h4>{restaurant.Name}</h4>
+                                <p>{restaurant.Address}</p>
+                                <p>{restaurant.Phone}</p>
+                                <p>{restaurant.Email}</p>
+                                <div className='control-button'>
+                                    <button onClick={() => setEditRestaurant(restaurant)}>Edit</button>
+                                    <button onClick={() => handleDeleteRestaurant(restaurant.id)}>Delete</button>
+                                    <button onClick={() => navigate(`/admin/menu/${restaurant.id}`)}>Manage Menu</button>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
                 )}
             </div>
             {editRestaurant && (
                 <div className="edit-restaurant">
                     <h3>Edit Restaurant</h3>
                     <div className='form-item'>
-                        <label htmlFor='Restaurant Name'>Restaurant Name:</label>
+                        <label htmlFor='Name'>Restaurant Name:</label>
                         <input
                             type="text"
-                            value={editRestaurant.name}
-                            onChange={(e) => setEditRestaurant({ ...editRestaurant, name: e.target.value })}
+                            value={editRestaurant.Name}
+                            onChange={(e) => setEditRestaurant({ ...editRestaurant, Name: e.target.value })}
                         />
                     </div>
                     <div className='form-item'>
-                        <label htmlFor='Address' >Address:</label>
+                        <label htmlFor='Address'>Address:</label>
                         <input
                             type="text"
-                            value={editRestaurant.address}
-                            onChange={(e) => setEditRestaurant({ ...editRestaurant, address: e.target.value })}
+                            value={editRestaurant.Address}
+                            onChange={(e) => setEditRestaurant({ ...editRestaurant, Address: e.target.value })}
                         />
                     </div>
                     <div className='form-item'>
                         <label htmlFor='Phone'>Phone:</label>
                         <input
-                            type="number"
-                            value={editRestaurant.phone}
-                            onChange={(e) => setEditRestaurant({ ...editRestaurant, phone: e.target.value })}
+                            type="text"
+                            value={editRestaurant.Phone}
+                            onChange={(e) => setEditRestaurant({ ...editRestaurant, Phone: e.target.value })}
                         />
                     </div>
                     <div className='form-item'>
                         <label htmlFor='Email'>Email:</label>
                         <input
                             type="email"
-                            value={editRestaurant.email}
-                            onChange={(e) => setEditRestaurant({ ...editRestaurant, email: e.target.value })}
+                            value={editRestaurant.Email}
+                            onChange={(e) => setEditRestaurant({ ...editRestaurant, Email: e.target.value })}
                         />
                     </div>
                     <div className='form-item'>
-                        <label htmlFor="Logo">Logo:</label>
+                        <label htmlFor="Logo_image">Logo:</label>
                         <input
                             type="file"
-                            value={editRestaurant.logo}
-                            onChange={(e) => setEditRestaurant({ ...editRestaurant, logo: e.target.value })}
+                            onChange={(e) => setEditRestaurant({ ...editRestaurant, Logo_image: e.target.files[0] })}
                         />
                     </div>
-                    <button onClick={() => handleUpdateRestaurant(editRestaurant.id)}>Save Changes</button>
+                    <div>
+                        <button onClick={() => handleUpdateRestaurant(editRestaurant.id)}>Save Changes</button>
+                        <button onClick={handleCancel}>Cancel</button>
+                    </div>
                 </div>
             )}
         </div>

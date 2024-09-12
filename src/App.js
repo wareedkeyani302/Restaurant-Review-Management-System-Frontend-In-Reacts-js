@@ -39,7 +39,7 @@ const App = () => {
         )}
         <Route path="*" element={<Navigate to={user && user.role !== 'admin' ? "/restaurants" : "/admin"} />} />
       </Routes>
-      {!isLoginPage && <Footer />}
+      {!isLoginPage && !isAdmin && <Footer />}
     </div>
   );
 };
