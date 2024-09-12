@@ -1,0 +1,144 @@
+/* ManageMenuItems.css */
+
+.manage-menu-items {
+    padding: 30px;
+    max-width: 1200px;
+    margin: auto;
+    background-color: #f0f4f8;
+    border-radius: 12px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+h2 {
+    font-size: 32px;
+    color: #2c3e50;
+    margin-bottom: 30px;
+    font-weight: 700;
+    text-align: center;
+}
+
+.add-menu-item,
+.edit-menu-item {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 30px;
+    border: 1px solid #dfe6e9;
+}
+
+h3 {
+    font-size: 26px;
+    color: #34495e;
+    margin-bottom: 20px;
+    font-weight: 600;
+    text-align: center;
+}
+
+input[type="text"],
+input[type="number"] {
+    width: calc(100% - 22px);
+    padding: 12px 15px;
+    margin-bottom: 15px;
+    border: 1px solid #ced6e0;
+    border-radius: 8px;
+    box-sizing: border-box;
+    font-size: 16px;
+}
+
+input[type="text"]::placeholder,
+input[type="number"]::placeholder {
+    color: #a1a1a1;
+}
+
+button {
+    padding: 12px 20px;
+    border: none;
+    border-radius: 8px;
+    color: #ffffff;
+    background-color: #007bff;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 600;
+    transition: background-color 0.3s, transform 0.2s;
+    margin-right: 10px;
+}
+
+button:hover {
+    background-color: #0056b3;
+    transform: scale(1.05);
+}
+
+.menu-items-list {
+    margin-top: 30px;
+}
+
+.menu-item {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+    border: 1px solid #dfe6e9;
+}
+
+.menu-item h4 {
+    font-size: 22px;
+    color: #2c3e50;
+    margin: 0;
+    margin-bottom: 10px;
+    font-weight: 600;
+}
+
+.menu-item p {
+    color: #7f8c8d;
+    margin: 0;
+    margin-bottom: 10px;
+    font-size: 16px;
+}
+
+.menu-item img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    margin-top: 10px;
+}
+
+.menu-item button {
+    background-color: #dc3545;
+}
+
+.menu-item button:hover {
+    background-color: #c82333;
+}
+
+@media (max-width: 768px) {
+    .manage-menu-items {
+        padding: 20px;
+    }
+
+    .add-menu-item,
+    .edit-menu-item,
+    .menu-item {
+        margin-bottom: 20px;
+        padding: 15px;
+    }
+
+    h2 {
+        font-size: 28px;
+    }
+
+    h3 {
+        font-size: 22px;
+    }
+
+    input[type="text"],
+    input[type="number"] {
+        font-size: 14px;
+    }
+
+    button {
+        font-size: 14px;
+        padding: 10px 15px;
+    }
+}

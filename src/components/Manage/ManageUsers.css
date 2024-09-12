@@ -1,0 +1,138 @@
+/* ManageUsers.css */
+
+.manage-users {
+    padding: 30px;
+    max-width: 1200px;
+    margin: auto;
+    background-color: #f4f6f9;
+    border-radius: 12px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+    font-size: 32px;
+    color: #2c3e50;
+    margin-bottom: 30px;
+    font-weight: 700;
+    text-align: center;
+}
+
+.add-user,
+.edit-user {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 30px;
+    border: 1px solid #dce2e6;
+}
+
+h3 {
+    font-size: 26px;
+    color: #34495e;
+    margin-bottom: 20px;
+    font-weight: 600;
+    text-align: center;
+}
+
+input[type="text"],
+input[type="email"] {
+    width: calc(100% - 22px);
+    padding: 12px 15px;
+    margin-bottom: 15px;
+    border: 1px solid #ced6e0;
+    border-radius: 8px;
+    box-sizing: border-box;
+    font-size: 16px;
+}
+
+input[type="text"]::placeholder,
+input[type="email"]::placeholder {
+    color: #a1a1a1;
+}
+
+button {
+    padding: 12px 20px;
+    border: none;
+    border-radius: 8px;
+    color: #ffffff;
+    background-color: #007bff;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 600;
+    transition: background-color 0.3s, transform 0.2s;
+    margin-right: 10px;
+}
+
+button:hover {
+    background-color: #0056b3;
+    transform: scale(1.05);
+}
+
+.users-list {
+    margin-top: 30px;
+}
+
+.user {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+    border: 1px solid #dce2e6;
+}
+
+.user h4 {
+    font-size: 22px;
+    color: #2c3e50;
+    margin: 0;
+    margin-bottom: 10px;
+    font-weight: 600;
+}
+
+.user p {
+    color: #7f8c8d;
+    margin: 0;
+    margin-bottom: 10px;
+    font-size: 16px;
+}
+
+.user button {
+    background-color: #dc3545;
+}
+
+.user button:hover {
+    background-color: #c82333;
+}
+
+@media (max-width: 768px) {
+    .manage-users {
+        padding: 20px;
+    }
+
+    .add-user,
+    .edit-user,
+    .user {
+        margin-bottom: 20px;
+        padding: 15px;
+    }
+
+    h2 {
+        font-size: 28px;
+    }
+
+    h3 {
+        font-size: 22px;
+    }
+
+    input[type="text"],
+    input[type="email"] {
+        font-size: 14px;
+    }
+
+    button {
+        font-size: 14px;
+        padding: 10px 15px;
+    }
+}
+

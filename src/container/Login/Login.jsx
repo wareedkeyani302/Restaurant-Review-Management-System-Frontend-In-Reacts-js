@@ -6,14 +6,20 @@ import './Login.css';
 import restaurant from '../../assets/restaurant.png';
 
 const Login = () => {
-    const { user } = useAuth();
-    const { login } = useAuth();
+    const { user, login } = useAuth();
     const navigate = useNavigate();
+
     useEffect(() => {
         if (user) {
-            navigate('/restaurants');
+            // Redirect based on user role
+            if (user.role === 'admin') {
+                navigate('/admin');
+            } else {
+                navigate('/restaurants');
+            }
         }
     }, [user, navigate]);
+
     const handleSubmit = async (values) => {
         const { email, password } = values;
 
@@ -35,7 +41,12 @@ const Login = () => {
                 console.log('User Data:', data);
                 login(data);
                 message.success('Login successful!');
-                navigate('/restaurants');
+                // Redirect based on user role
+                if (data.role === 'admin') {
+                    navigate('/admin');
+                } else {
+                    navigate('/restaurants');
+                }
             } else {
                 console.error('No user data found in response:', data);
                 message.error('Login failed! User data not found.');
@@ -65,30 +76,17 @@ const Login = () => {
                     <div className='login-form'>
                         <Form
                             name="basic"
-                            labelCol={{
-                                span: 8,
-                            }}
-                            wrapperCol={{
-                                span: 16,
-                            }}
-                            style={{
-                                maxWidth: 600,
-                            }}
-                            initialValues={{
-                                remember: true,
-                            }}
+                            labelCol={{ span: 8 }}
+                            wrapperCol={{ span: 16 }}
+                            style={{ maxWidth: 600 }}
+                            initialValues={{ remember: true }}
                             onFinish={handleSubmit}
                             autoComplete="off"
                         >
                             <Form.Item
                                 label="Email"
                                 name="email"
-                                rules={[
-                                    {
-                                        required: true,
-                                        message: 'Please input your valid Email!',
-                                    },
-                                ]}
+                                rules={[{ required: true, message: 'Please input your valid Email!' }]}
                             >
                                 <Input />
                             </Form.Item>
@@ -96,12 +94,7 @@ const Login = () => {
                             <Form.Item
                                 label="Password"
                                 name="password"
-                                rules={[
-                                    {
-                                        required: true,
-                                        message: 'Please input your password!',
-                                    },
-                                ]}
+                                rules={[{ required: true, message: 'Please input your password!' }]}
                             >
                                 <Input.Password />
                             </Form.Item>
@@ -109,19 +102,13 @@ const Login = () => {
                             <Form.Item
                                 name="remember"
                                 valuePropName="checked"
-                                wrapperCol={{
-                                    offset: 8,
-                                    span: 16,
-                                }}
+                                wrapperCol={{ offset: 8, span: 16 }}
                             >
                                 <Checkbox>Remember me</Checkbox>
                             </Form.Item>
 
                             <Form.Item
-                                wrapperCol={{
-                                    offset: 8,
-                                    span: 16,
-                                }}
+                                wrapperCol={{ offset: 8, span: 16 }}
                             >
                                 <Button type="primary" htmlType="submit">
                                     Login

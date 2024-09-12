@@ -27,8 +27,10 @@ const Navbar = () => {
         <li className="p__opensans"><NavLink to="/about">About</NavLink></li>
         <li className="p__opensans"><NavLink to="/restaurants">Restaurants</NavLink></li>
         <li className="p__opensans"><NavLink to="/contact">Contact</NavLink></li>
-        <li className="p__opensans"><button type='button' className='logout-button' onClick={handleLogout}>Logout</button></li>
       </ul>
+      <div className='app__navbar_logout'>
+      <button type='button' className='logout-button' onClick={handleLogout}>Logout</button>
+      </div>
       <div className="app__navbar-smallscreen">
         <GiHamburgerMenu color="#fff" fontSize={27} onClick={() => setToggleMenu(true)} />
         {toggleMenu && (
@@ -39,10 +41,6 @@ const Navbar = () => {
               <li><NavLink to="/about" onClick={() => setToggleMenu(false)}>About</NavLink></li>
               <li><NavLink to="/restaurants" onClick={() => setToggleMenu(false)}>Restaurants</NavLink></li>
               <li><NavLink to="/contact" onClick={() => setToggleMenu(false)}>Contact</NavLink></li>
-              <li><button type='button' className='logout-button' onClick={() => {
-                handleLogout();
-                setToggleMenu(false);
-              }}>Logout</button></li>
             </ul>
           </div>
         )}
