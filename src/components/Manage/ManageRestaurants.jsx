@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './ManageRestaurants.css';
+import { FaEdit } from "react-icons/fa";
+import { MdDelete, MdOutlineRestaurantMenu } from "react-icons/md";
+import ItoolTip from '../IComponent/ItoolTip';
 
 const ManageRestaurants = () => {
     const [restaurants, setRestaurants] = useState([]);
@@ -90,7 +93,7 @@ const ManageRestaurants = () => {
     };
 
     const getImageUrl = (path) => {
-        if (!path) return ''; // Return an empty string or a default image URL
+        if (!path) return '';
         return `http://192.168.3.178:8081/${path.replace(/\\/g, '/')}`;
     };
 
@@ -162,9 +165,17 @@ const ManageRestaurants = () => {
                                 <p>{restaurant.Phone}</p>
                                 <p>{restaurant.Email}</p>
                                 <div className='control-button'>
-                                    <button onClick={() => setEditRestaurant(restaurant)}>Edit</button>
-                                    <button onClick={() => handleDeleteRestaurant(restaurant.id)}>Delete</button>
-                                    <button onClick={() => navigate(`/admin/menu/${restaurant.id}`)}>Manage Menu</button>
+                                    <ItoolTip
+                                        title="edit restaurant"
+                                    >
+                                        <FaEdit onClick={() => setEditRestaurant(restaurant)} className='control-icons' />
+                                    </ItoolTip>
+                                    <ItoolTip title="delete restaurant">
+                                        <MdDelete onClick={() => handleDeleteRestaurant(restaurant.id)} className='control-icons' />
+                                    </ItoolTip>
+                                    <ItoolTip title="manage menu">
+                                        <MdOutlineRestaurantMenu onClick={() => navigate(`/admin/menu/${restaurant.id}`)} className='control-icons' />
+                                    </ItoolTip>
                                 </div>
                             </div>
                         ))}

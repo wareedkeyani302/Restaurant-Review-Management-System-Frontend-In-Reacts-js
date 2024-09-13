@@ -4,7 +4,7 @@ import { GiHamburgerMenu } from 'react-icons/gi';
 import { NavLink } from 'react-router-dom';
 import { MdOutlineRestaurantMenu } from 'react-icons/md';
 import { useAuth } from '../../container/Authentication/AuthContext';
-import images from '../../constants/images';
+import dashboardLogo from '../../assets/dashboardLogo.jpeg';
 import './Navbar.css';
 
 const Navbar = () => {
@@ -20,7 +20,7 @@ const Navbar = () => {
   return (
     <nav className="app__navbar">
       <div className="app__navbar-logo">
-        <img src={images.gericht} alt="app logo" />
+        <img src={dashboardLogo} alt="app logo" />
       </div>
       <ul className="app__navbar-links">
         <li className="p__opensans"><NavLink to="/">Home</NavLink></li>

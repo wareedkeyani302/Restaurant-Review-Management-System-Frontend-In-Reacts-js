@@ -101,6 +101,7 @@ const Restaurants = () => {
                     placeholder="Search by Restaurant name"
                     value={searchRestaurant}
                     onChange={handleSearch}
+                    className='search-input'
                 />
             </div>
             <div className="all-restaurants-container">

@@ -4,9 +4,13 @@ import ManageRestaurants from '../Manage/ManageRestaurants';
 import ManageMenuItems from '../Manage/ManageMenuItems';
 import ManageUsers from '../Manage/ManageUsers';
 import './AdminDashboard.css';
+import AdminFooter from './AdminFooter';
+import AdminHeader from './AdminHeader';
 
 const AdminDashboard = () => {
     return (
+        <>
+        <AdminHeader />
         <div className="admin-dashboard">
             <nav className="admin-nav">
                 <ul>
@@ -23,6 +27,8 @@ const AdminDashboard = () => {
                 </Routes>
             </div>
         </div>
+        <AdminFooter />
+        </>
     );
 };
 

@@ -10,6 +10,24 @@
     background-position: center;
     background-attachment: fixed;
   }
+  .main{
+    background-image: url('../../assets/bg.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+  }
+  .search-restaurant {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    margin-bottom: 15px;
+}
+.search-input {
+  margin: 0;
+  width: 500px;
+}
   
   .restaurant-card {
     background: var(--color-black);

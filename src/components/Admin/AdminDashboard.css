@@ -1,5 +1,3 @@
-/* AdminDashboard.css */
-
 body {
     margin: 0;
     font-family: 'Arial', sans-serif;
@@ -8,7 +6,7 @@ body {
 
 .admin-dashboard {
     display: flex;
-    height: 100vh;
+    height: 85vh;
 }
 
 .admin-nav {

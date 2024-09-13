@@ -15,7 +15,9 @@
 }
 
 .app__navbar-logo img {
-  width: 150px;
+  width: 125px;
+  height: 54px;
+  border-radius: 26px;
 }
 
 .app__navbar-links {

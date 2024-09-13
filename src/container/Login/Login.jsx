@@ -43,7 +43,7 @@ const Login = () => {
                 message.success('Login successful!');
                 // Redirect based on user role
                 if (data.role === 'admin') {
-                    navigate('/admin');
+                    navigate('/admin/restaurants');
                 } else {
                     navigate('/restaurants');
                 }
@@ -62,12 +62,12 @@ const Login = () => {
             <div className='login-left-side'>
                 <div className='left-side-content-container'>
                     <div className='site-info'>
-                        <h2 className='title'>Restaurant Management System</h2>
+                        <h2 className='title'>FeastFusion</h2>
                         <p className='description'>Rate and review your favorite Restaurants here</p>
                     </div>
                     <img className='logo-img' src={restaurant} alt='Logo Image' />
                     <div className='footer'>
-                        <p className='footer-text'>© 2024 Restaurant Management System. All rights reserved.</p>
+                        <p className='footer-text'>© 2024 FeastFusion. All rights reserved.</p>
                     </div>
                 </div>
             </div>

@@ -21,11 +21,11 @@ const App = () => {
 
   return (
     <div>
-      {!isLoginPage && <Navbar />}
+      {!isLoginPage && !isAdmin && <Navbar />}
       <Routes>
         <Route
           path='/login'
-          element={user ? <Navigate to={isAdmin ? "/admin" : "/restaurants"} /> : <Login />}
+          element={user ? <Navigate to={isAdmin ? "/admin/restaurants" : "/restaurants"} /> : <Login />}
         />
         <Route path="/" element={<PrivateRoute element={<Home />} />} />
         <Route path="/about" element={<PrivateRoute element={<About />} />} />
@@ -37,7 +37,7 @@ const App = () => {
             <Route path="/admin/*" element={<PrivateRoute element={<AdminDashboard />} requiredRole="admin" />} />
           </>
         )}
-        <Route path="*" element={<Navigate to={user && user.role !== 'admin' ? "/restaurants" : "/admin"} />} />
+        <Route path="*" element={<Navigate to={user && user.role !== 'admin' ? "/restaurants" : "/admin/restaurants"} />} />
       </Routes>
       {!isLoginPage && !isAdmin && <Footer />}
     </div>

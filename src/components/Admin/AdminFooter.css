@@ -1,4 +1,4 @@
-.footer {
+.admin-footer {
     background-color: black;
     color: white;
     text-align: center;
@@ -7,4 +7,6 @@
     bottom: 0;
     width: 100%;
     font-size: 14px;
+    border-bottom-right-radius: 5px;
+    border-bottom-left-radius: 5px;
   }
