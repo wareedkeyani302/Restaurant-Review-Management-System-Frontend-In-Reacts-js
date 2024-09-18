@@ -1,8 +1,8 @@
 <div align="center">
-    <a href="https://gericht-restaurant-fv.netlify.app" target="_blank">
+<!--     <a href="https://gericht-restaurant-fv.netlify.app" target="_blank">
       <img src="public/design/preview.png" alt="Project Banner">
-    </a>
-  <h3 align="center">Gericht Restaurant</h3>
+    </a> -->
+  <h3 align="center">FeastFusiont</h3>
 </div>
 
 ##  <br /> 📋 <a name="table">Table of Contents</a>
