@@ -84,6 +84,7 @@ button:hover {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     margin-bottom: 20px;
     border: 1px solid #dfe6e9;
+    max-width: 550px;
 }
 
 .menu-item h4 {
@@ -103,9 +104,16 @@ button:hover {
 
 .menu-item img {
     max-width: 100%;
-    height: auto;
+    height: 200px;
     border-radius: 8px;
     margin-top: 10px;
+    object-fit: cover;
+}
+.menu-item-action-buttons{
+    display: flex;
+    margin-top: 5px;
+    align-items: end;
+    justify-content: end;
 }
 
 .menu-item button {

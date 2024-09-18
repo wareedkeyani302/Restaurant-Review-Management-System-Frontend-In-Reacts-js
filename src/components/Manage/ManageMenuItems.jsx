@@ -13,6 +13,7 @@ const ManageMenuItems = () => {
     });
     const [editMenuItem, setEditMenuItem] = useState(null);
     const [loading, setLoading] = useState(false);
+    const [shouldRerender, setShouldRerender] = useState(false);
 
     useEffect(() => {
         const fetchMenuItems = async () => {
@@ -31,7 +32,7 @@ const ManageMenuItems = () => {
         };
 
         fetchMenuItems();
-    }, [restaurantId]);
+    }, [restaurantId, shouldRerender]);
 
     const handleAddMenuItem = async () => {
         try {
@@ -53,6 +54,7 @@ const ManageMenuItems = () => {
                 const data = await response.json();
                 setMenuItems([...menuItems, data]);
                 setNewMenuItem({ Item_name: '', Description: '', Price: '', Image: null });
+                setShouldRerender(prevState => !prevState);
             }
         } catch (error) {
             console.error('Failed to add menu item:', error);
@@ -78,6 +80,7 @@ const ManageMenuItems = () => {
             if (response.ok) {
                 const updatedItem = await response.json();
                 setMenuItems(menuItems.map(item => (item.id === id ? updatedItem : item)));
+                setShouldRerender(prevState => !prevState);
                 setEditMenuItem(null);
             }
         } catch (error) {
@@ -167,10 +170,12 @@ const ManageMenuItems = () => {
                         {menuItems.map(item => (
                             <div key={item.id} className="menu-item">
                                 <img src={getImageUrl(item.Image)} alt={item.Item_name} />
+                                <div className='menu-item-information'>
                                 <h4>{item.Item_name}</h4>
                                 <p>{item.Description}</p>
                                 <p>Price: ${item.Price}</p>
-                                <div style={{marginTop: '5px'}}>
+                                </div>
+                                <div className='menu-item-action-buttons'>
                                 <button onClick={() => setEditMenuItem(item)}>Edit</button>
                                 <button onClick={() => handleDeleteMenuItem(item.id)}>Delete</button>
                                 </div>
@@ -225,6 +230,3 @@ const ManageMenuItems = () => {
 };
 
 export default ManageMenuItems;
-
-
-

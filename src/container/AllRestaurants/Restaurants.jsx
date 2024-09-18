@@ -145,11 +145,11 @@ const Restaurants = () => {
                                     {menu.map((item) => {
                                         const imageUrl = item.Image ? `http://192.168.3.178:8081/${item.Image.replace(/\\/g, '/')}` : 'https://via.placeholder.com/100';
                                         return (
-                                            <div className="menu-item" key={item.id}>
-                                                <div className="menu-item-img">
+                                            <div className="menu-item-card" key={item.id}>
+                                                <div className="menu-item-card-img">
                                                     <img src={imageUrl} alt={item.Item_name || 'Menu Item Image'} />
                                                 </div>
-                                                <div className="menu-item-info">
+                                                <div className="menu-item-card-info">
                                                     <h4>{item.Item_name || 'Unnamed Item'}</h4>
                                                     <p>{item.Description || 'No description'}</p>
                                                     <p>Price: ${item.Price || 'N/A'}</p>

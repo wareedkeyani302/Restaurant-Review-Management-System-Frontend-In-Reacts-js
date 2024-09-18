@@ -10,6 +10,7 @@ const ManageRestaurants = () => {
     const [newRestaurant, setNewRestaurant] = useState({ Name: '', Address: '', Phone: '', Email: '', Logo_image: null });
     const [editRestaurant, setEditRestaurant] = useState(null);
     const [loading, setLoading] = useState(false);
+    const [shouldRerender, setShouldRerender] = useState(false);
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -29,7 +30,7 @@ const ManageRestaurants = () => {
         };
 
         fetchRestaurants();
-    }, []);
+    }, [shouldRerender]);
 
     const handleAddRestaurant = async () => {
         const formData = new FormData();
@@ -50,6 +51,7 @@ const ManageRestaurants = () => {
                 const data = await response.json();
                 setRestaurants([...restaurants, data]);
                 setNewRestaurant({ Name: '', Address: '', Phone: '', Email: '', Logo_image: null });
+                setShouldRerender(prevState => !prevState);
             }
         } catch (error) {
             console.error('Failed to add restaurant:', error);
@@ -74,6 +76,7 @@ const ManageRestaurants = () => {
             if (response.ok) {
                 const updatedRestaurant = await response.json();
                 setRestaurants(restaurants.map(r => (r.id === id ? updatedRestaurant : r)));
+                setShouldRerender(prevState => !prevState);
                 setEditRestaurant(null);
             }
         } catch (error) {
