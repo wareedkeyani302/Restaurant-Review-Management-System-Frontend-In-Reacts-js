@@ -103,3 +103,53 @@ svg.control-icons {
     color: green;
     cursor: pointer;
 }
+
+.add-new {
+    background-color: #ff4d4d;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    margin: 0 1rem;
+}
+
+.add-new:hover {
+    background-color: #e60000;
+    transform: scale(1.05);
+}
+
+.add-new:focus {
+    outline: 2px solid #fff;
+    outline-offset: 2px;
+}
+
+.restaurant-action {
+    display: flex;
+    margin-top: 5px;
+    align-items: end;
+    justify-content: end;
+    gap: 5px;
+}
+
+.restaurant-action-button {
+    background-color: #dc3545;
+    color: #ffffff;
+    padding: 8px 12px;
+    font-size: 14px;
+    border: none;
+    border-radius: 4px;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.restaurant-action-button:hover {
+    background-color: #c82333;
+    transform: translateY(-2px);
+}
+
+.restaurant-action-button:active {
+    background-color: #a71d2a;
+    transform: translateY(0);
+}

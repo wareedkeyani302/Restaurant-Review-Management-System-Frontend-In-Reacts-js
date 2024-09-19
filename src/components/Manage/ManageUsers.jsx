@@ -119,7 +119,7 @@ const ManageUsers = () => {
                         onChange={(e) => setNewUser({ ...newUser, password: e.target.value })}
                     />
                 </div>
-                <button onClick={handleAddUser}>Add User</button>
+                <button onClick={handleAddUser} className='add-user-button'>Add User</button>
             </div>
             <div className="users-list">
                 <h3>Existing Users</h3>
@@ -131,9 +131,9 @@ const ManageUsers = () => {
                             <h4>{user.username}</h4>
                             <p>{user.email}</p>
                             <p>Role: {user.role}</p>
-                            <div>
-                            <button onClick={() => setEditUser(user)}>Edit</button>
-                            <button onClick={() => handleDeleteUser(user.user_id)}>Delete</button>
+                            <div className='user-action'>
+                                <button onClick={() => setEditUser(user)} className='user-action-buttons'>Edit</button>
+                                <button onClick={() => handleDeleteUser(user.user_id)} className='user-action-buttons'>Delete</button>
                             </div>
                         </div>
                     ))
@@ -157,9 +157,9 @@ const ManageUsers = () => {
                         value={editUser.role}
                         onChange={(e) => setEditUser({ ...editUser, role: e.target.value })}
                     />
-                    <div>
-                    <button onClick={handleUpdateUser}>Save Changes</button>
-                    <button onClick={handlCancel}>Cancel</button>
+                    <div className='user-action'>
+                        <button onClick={handleUpdateUser} className='user-action-buttons'>Save Changes</button>
+                        <button onClick={handlCancel} className='user-action-buttons'>Cancel</button>
                     </div>
                 </div>
             )}

@@ -6,7 +6,8 @@
     border-radius: 12px;
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
 }
-.menu-items-grid{
+
+.menu-items-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 16px;
@@ -55,22 +56,26 @@ input[type="number"]::placeholder {
     color: #a1a1a1;
 }
 
-button {
-    padding: 12px 20px;
+.add-menu-button {
+    background-color: #ff4d4d;
+    color: #fff;
     border: none;
-    border-radius: 8px;
-    color: #ffffff;
-    background-color: #007bff;
+    border-radius: 4px;
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
     cursor: pointer;
-    font-size: 16px;
-    font-weight: 600;
-    transition: background-color 0.3s, transform 0.2s;
-    margin-right: 10px;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    margin: 0 1rem;
 }
 
-button:hover {
-    background-color: #0056b3;
+.add-menu-button:hover {
+    background-color: #e60000;
     transform: scale(1.05);
+}
+
+.add-menu-button:focus {
+    outline: 2px solid #fff;
+    outline-offset: 2px;
 }
 
 .menu-items-list {
@@ -109,19 +114,33 @@ button:hover {
     margin-top: 10px;
     object-fit: cover;
 }
-.menu-item-action-buttons{
+
+.menu-item-action-buttons {
     display: flex;
     margin-top: 5px;
     align-items: end;
     justify-content: end;
+    gap: 5px;
 }
 
-.menu-item button {
+.menu-action-button {
     background-color: #dc3545;
+    color: #ffffff;
+    padding: 8px 12px;
+    font-size: 14px;
+    border: none;
+    border-radius: 4px;
+    transition: background-color 0.3s ease, transform 0.3s ease;
 }
 
-.menu-item button:hover {
+.menu-action-button:hover {
     background-color: #c82333;
+    transform: translateY(-2px);
+}
+
+.menu-action-button:active {
+    background-color: #a71d2a;
+    transform: translateY(0);
 }
 
 @media (max-width: 768px) {

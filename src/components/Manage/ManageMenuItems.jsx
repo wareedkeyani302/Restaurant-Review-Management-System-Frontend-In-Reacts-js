@@ -110,7 +110,7 @@ const ManageMenuItems = () => {
 
     const getImageUrl = (path) => {
         if (!path) {
-            return ''; 
+            return '';
         }
         return `http://192.168.3.178:8081/${path.replace(/\\/g, '/')}`;
     };
@@ -159,7 +159,7 @@ const ManageMenuItems = () => {
                         onChange={(e) => handleImageChange(e, setNewMenuItem)}
                     />
                 </div>
-                <button onClick={handleAddMenuItem}>Add Menu Item</button>
+                <button onClick={handleAddMenuItem} className='add-menu-button'>Add Menu Item</button>
             </div>
             <div className="menu-items-list">
                 <h3>Existing Menu Items</h3>
@@ -171,13 +171,13 @@ const ManageMenuItems = () => {
                             <div key={item.id} className="menu-item">
                                 <img src={getImageUrl(item.Image)} alt={item.Item_name} />
                                 <div className='menu-item-information'>
-                                <h4>{item.Item_name}</h4>
-                                <p>{item.Description}</p>
-                                <p>Price: ${item.Price}</p>
+                                    <h4>{item.Item_name}</h4>
+                                    <p>{item.Description}</p>
+                                    <p>Price: ${item.Price}</p>
                                 </div>
                                 <div className='menu-item-action-buttons'>
-                                <button onClick={() => setEditMenuItem(item)}>Edit</button>
-                                <button onClick={() => handleDeleteMenuItem(item.id)}>Delete</button>
+                                    <button onClick={() => setEditMenuItem(item)} className='menu-action-button'>Edit</button>
+                                    <button onClick={() => handleDeleteMenuItem(item.id)} className='menu-action-button'>Delete</button>
                                 </div>
                             </div>
                         ))}
@@ -219,9 +219,9 @@ const ManageMenuItems = () => {
                             onChange={(e) => handleImageChange(e, setEditMenuItem)}
                         />
                     </div>
-                    <div>
-                        <button onClick={() => handleUpdateMenuItem(editMenuItem.id)}>Save Changes</button>
-                        <button onClick={handleCancel}>Cancel</button>
+                    <div className='menu-item-action-buttons'>
+                        <button onClick={() => handleUpdateMenuItem(editMenuItem.id)} className='menu-action-button'>Save Changes</button>
+                        <button onClick={handleCancel} className='menu-action-button'>Cancel</button>
                     </div>
                 </div>
             )}

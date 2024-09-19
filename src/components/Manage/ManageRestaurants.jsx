@@ -152,7 +152,7 @@ const ManageRestaurants = () => {
                         onChange={(e) => setNewRestaurant({ ...newRestaurant, Logo_image: e.target.files[0] })}
                     />
                 </div>
-                <button onClick={handleAddRestaurant}>Add Restaurant</button>
+                <button onClick={handleAddRestaurant} className='add-new'>Add Restaurant</button>
             </div>
             <div className="restaurants-list">
                 <h3>Existing Restaurants</h3>
@@ -227,9 +227,9 @@ const ManageRestaurants = () => {
                             onChange={(e) => setEditRestaurant({ ...editRestaurant, Logo_image: e.target.files[0] })}
                         />
                     </div>
-                    <div>
-                        <button onClick={() => handleUpdateRestaurant(editRestaurant.id)}>Save Changes</button>
-                        <button onClick={handleCancel}>Cancel</button>
+                    <div className='restaurant-action'>
+                        <button onClick={() => handleUpdateRestaurant(editRestaurant.id)} className='restaurant-action-button'>Save Changes</button>
+                        <button onClick={handleCancel} className='restaurant-action-button'>Cancel</button>
                     </div>
                 </div>
             )}
