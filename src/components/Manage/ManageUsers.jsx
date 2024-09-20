@@ -6,6 +6,7 @@ const ManageUsers = () => {
     const [newUser, setNewUser] = useState({ username: '', email: '', role: '', password: '' });
     const [editUser, setEditUser] = useState(null);
     const [loading, setLoading] = useState(false);
+    const [shouldRerender, setShouldRerender] = useState(false);
 
     useEffect(() => {
         const fetchUsers = async () => {
@@ -24,7 +25,7 @@ const ManageUsers = () => {
         };
 
         fetchUsers();
-    }, []);
+    }, [shouldRerender]);
 
     const handleAddUser = async () => {
         try {
@@ -37,6 +38,7 @@ const ManageUsers = () => {
                 const data = await response.json();
                 setUsers([...users, data]);
                 setNewUser({ username: '', email: '', role: '', password: '' });
+                setShouldRerender(prevState => !prevState);
             }
         } catch (error) {
             console.error('Failed to add user:', error);
@@ -55,6 +57,7 @@ const ManageUsers = () => {
                     const updatedUser = await response.json();
                     setUsers(users.map(user => (user.user_id === updatedUser.user_id ? updatedUser : user)));
                     setEditUser(null);
+                    setShouldRerender(prevState => !prevState);
                 }
             } catch (error) {
                 console.error('Failed to update user:', error);
