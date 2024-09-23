@@ -1,12 +1,14 @@
 import React,{useState, useEffect} from 'react'
-// import Services from '../OurServices/Services';
 import Gallery from '../Gallery/Gallery';
 import Header from '../Header/Header';
 import RestaurantsCard from '../Restaurant/RestaurantsCard';
+import { useAuth } from '../Authentication/AuthContext';
+import RecomendedMenu from '../Menu/RecomendedMenu';
 
 
 const Home = () => {
     const [restaurants, setRestaurants] = useState([]);
+    const {user} = useAuth();
 
   useEffect(() => {
     const fetchRestaurants = async () => {
@@ -27,9 +29,10 @@ const Home = () => {
   return (
     <div>
         <Header />
-        <RestaurantsCard restaurants ={restaurants} />
-        
-        {/* <Services /> */}
+        {user && user.recommendations && user.recommendations.length > 0 && (
+          <RecomendedMenu items = {user.recommendations} />
+        )}
+        <RestaurantsCard restaurants ={restaurants} />       
         <Gallery />
     </div>
   )

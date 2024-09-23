@@ -78,8 +78,8 @@ input.search-input {
   }
   
   .menu-items-container {
-    display: flex;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
     gap: 1rem;
     justify-content: center;
     padding: 1rem;
@@ -99,8 +99,7 @@ input.search-input {
     overflow: hidden;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     transition: transform 0.3s ease-in-out;
-    flex: 1 1 calc(33% - 1rem); 
-    max-width: calc(33% - 1rem); 
+    max-width: 550px;
     margin: 0.5rem;
   }
   
