@@ -84,6 +84,13 @@ input.search-input {
     justify-content: center;
     padding: 1rem;
   }
+  h3.modal-heading {
+    font-size: 26px;
+    color: var(--color-golden);
+    margin-bottom: 20px;
+    font-weight: 600;
+    text-align: center
+  }
   
   .menu-item-card {
     background: var(--color-black);

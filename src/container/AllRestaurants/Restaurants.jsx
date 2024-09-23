@@ -140,7 +140,7 @@ const Restaurants = () => {
                             <p>Loading menu...</p>
                         ) : menu.length > 0 ? (
                             <div>
-                                <h3>Menu</h3>
+                                <h3 className='modal-heading'>Menu</h3>
                                 <div className="menu-items-container">
                                     {menu.map((item) => {
                                         const imageUrl = item.Image ? `http://192.168.3.178:8081/${item.Image.replace(/\\/g, '/')}` : 'https://via.placeholder.com/100';
