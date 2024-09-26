@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './ManageUsers.css';
+import EndPoints from '../../shared/DomainUrls';
 
 const ManageUsers = () => {
     const [users, setUsers] = useState([]);
@@ -12,7 +13,7 @@ const ManageUsers = () => {
         const fetchUsers = async () => {
             setLoading(true);
             try {
-                const response = await fetch('http://192.168.3.178:8081/api/all/users');
+                const response = await fetch(EndPoints.AllUser);
                 if (response.ok) {
                     const data = await response.json();
                     setUsers(data);
@@ -29,7 +30,7 @@ const ManageUsers = () => {
 
     const handleAddUser = async () => {
         try {
-            const response = await fetch('http://192.168.3.178:8081/api/signup', {
+            const response = await fetch(EndPoints.SignUp, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(newUser),
@@ -48,7 +49,7 @@ const ManageUsers = () => {
     const handleUpdateUser = async () => {
         if (editUser) {
             try {
-                const response = await fetch(`http://localhost:8081/api/User/${editUser.user_id}`, {
+                const response = await fetch(`${EndPoints.EditUser}${editUser.user_id}`, {
                     method: 'PUT',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(editUser),
@@ -67,7 +68,7 @@ const ManageUsers = () => {
 
     const handleDeleteUser = async (userId) => {
         try {
-            const response = await fetch(`http://localhost:8081/api/User/${userId}`, {
+            const response = await fetch(`${EndPoints.DeleteUser}${userId}`, {
                 method: 'DELETE',
             });
             if (response.ok) {

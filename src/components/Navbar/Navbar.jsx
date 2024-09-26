@@ -8,7 +8,7 @@ import dashboardLogo from '../../assets/dashboardLogo.jpeg';
 import './Navbar.css';
 
 const Navbar = () => {
-  const { logout } = useAuth();
+  const { logout, user } = useAuth();
   const navigate = useNavigate();
   const [toggleMenu, setToggleMenu] = useState(false);
 
@@ -16,6 +16,9 @@ const Navbar = () => {
     logout();
     navigate('/login');
   };
+  const handleLogin = () => {
+    navigate('/login');
+  }
 
   return (
     <nav className="app__navbar">
@@ -28,9 +31,15 @@ const Navbar = () => {
         <li className="p__opensans"><NavLink to="/restaurants">Restaurants</NavLink></li>
         <li className="p__opensans"><NavLink to="/contact">Contact</NavLink></li>
       </ul>
-      <div className='app__navbar_logout'>
-      <button type='button' className='logout-button' onClick={handleLogout}>Logout</button>
-      </div>
+      {!user ? (
+        <div className='app__navbar_logout'>
+          <button type='button' className='logout-button' onClick={handleLogin}>Login</button>
+        </div>
+      ) : (
+        <div className='app__navbar_logout'>
+          <button type='button' className='logout-button' onClick={handleLogout}>Logout</button>
+        </div>
+      )}
       <div className="app__navbar-smallscreen">
         <GiHamburgerMenu color="#fff" fontSize={27} onClick={() => setToggleMenu(true)} />
         {toggleMenu && (

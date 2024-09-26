@@ -3,6 +3,7 @@ import { useLocation } from 'react-router-dom';
 
 import StarRating from './StarRating';
 import './Feedback.css';
+import EndPoints from '../../shared/DomainUrls';
 
 const Feedback = () => {
     const location = useLocation();
@@ -27,7 +28,7 @@ const Feedback = () => {
         // console.log('Submitting feedback with data:', feedbackData);
 
 
-        fetch('http://localhost:8081/api/add/feedback', {
+        fetch(EndPoints.AddFeedBack, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../Authentication/AuthContext';
 import './Login.css';
 import restaurant from '../../assets/restaurant.png';
+import EndPoints from '../../shared/DomainUrls';
 
 const Login = () => {
     const { user, login } = useAuth();
@@ -14,16 +15,20 @@ const Login = () => {
             if (user.role === 'admin') {
                 navigate('/admin/restaurants');
             } else {
-                navigate('/restaurants');
+                navigate('/home');
             }
         }
     }, [user, navigate]);
+
+    // const handleCreateAccount = () =>{
+    //     navigate('/registration');
+    // }
 
     const handleSubmit = async (values) => {
         const { email, password } = values;
 
         try {
-            const response = await fetch('http://192.168.3.178:8081/api/login', {
+            const response = await fetch(EndPoints.Login, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -43,7 +48,7 @@ const Login = () => {
                 if (data.role === 'admin') {
                     navigate('/admin/restaurants');
                 } else {
-                    navigate('/restaurants');
+                    navigate('/home');
                 }
             } else {
                 console.error('No user data found in response:', data);
@@ -112,7 +117,16 @@ const Login = () => {
                                     Login
                                 </Button>
                             </Form.Item>
+                            {/* <p className='registration'>OR</p>
+                            <Form.Item
+                                wrapperCol={{ offset: 8, span: 16 }}
+                            >
+                                <Button type="primary" htmlType="submit" onClick={handleCreateAccount}>
+                                    Create account
+                                </Button>
+                            </Form.Item> */}
                         </Form>
+                        <p className='registration'>Don't have any account?<a href='/registration'> Get Register</a></p>
                     </div>
                 </div>
             </div>

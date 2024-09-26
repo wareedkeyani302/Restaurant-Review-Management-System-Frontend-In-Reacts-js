@@ -4,6 +4,7 @@ import './ManageRestaurants.css';
 import { FaEdit } from "react-icons/fa";
 import { MdDelete, MdOutlineRestaurantMenu } from "react-icons/md";
 import ItoolTip from '../IComponent/ItoolTip';
+import EndPoints from '../../shared/DomainUrls';
 
 const ManageRestaurants = () => {
     const [restaurants, setRestaurants] = useState([]);
@@ -17,7 +18,7 @@ const ManageRestaurants = () => {
         const fetchRestaurants = async () => {
             setLoading(true);
             try {
-                const response = await fetch('http://192.168.3.178:8081/api/all/restaurants');
+                const response = await fetch(EndPoints.AllRestaurant);
                 if (response.ok) {
                     const data = await response.json();
                     setRestaurants(data);
@@ -43,7 +44,7 @@ const ManageRestaurants = () => {
         }
 
         try {
-            const response = await fetch('http://192.168.3.178:8081/api/add', {
+            const response = await fetch(EndPoints.AddRestaurant, {
                 method: 'POST',
                 body: formData,
             });
@@ -69,7 +70,7 @@ const ManageRestaurants = () => {
         }
 
         try {
-            const response = await fetch(`http://192.168.3.178:8081/api/restaurant/${id}`, {
+            const response = await fetch(`${EndPoints.EditRestaurant}${id}`, {
                 method: 'PUT',
                 body: formData,
             });
@@ -86,7 +87,7 @@ const ManageRestaurants = () => {
 
     const handleDeleteRestaurant = async (id) => {
         try {
-            await fetch(`http://192.168.3.178:8081/api/restaurant/${id}`, {
+            await fetch(`${EndPoints.DeleteRestaurant}${id}`, {
                 method: 'DELETE',
             });
             setRestaurants(restaurants.filter(r => r.id !== id));

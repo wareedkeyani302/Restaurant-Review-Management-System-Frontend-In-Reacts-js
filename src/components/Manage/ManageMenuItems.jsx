@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import './ManageMenuItems.css';
+import EndPoints from '../../shared/DomainUrls';
 
 const ManageMenuItems = () => {
     const { restaurantId } = useParams();
@@ -19,7 +20,7 @@ const ManageMenuItems = () => {
         const fetchMenuItems = async () => {
             setLoading(true);
             try {
-                const response = await fetch(`http://192.168.3.178:8081/api/menu/restaurant/${restaurantId}`);
+                const response = await fetch(`${EndPoints.GetMenu}${restaurantId}`);
                 if (response.ok) {
                     const data = await response.json();
                     setMenuItems(data);
@@ -45,7 +46,7 @@ const ManageMenuItems = () => {
             }
             formData.append('restaurant_id', restaurantId);
 
-            const response = await fetch('http://192.168.3.178:8081/api/add/menu', {
+            const response = await fetch(EndPoints.AddMenu, {
                 method: 'POST',
                 body: formData,
             });
@@ -72,7 +73,7 @@ const ManageMenuItems = () => {
             }
             formData.append('restaurant_id', restaurantId);
 
-            const response = await fetch(`http://192.168.3.178:8081/api/menu/${id}`, {
+            const response = await fetch(`${EndPoints.EditMenu}${id}`, {
                 method: 'PUT',
                 body: formData,
             });
@@ -90,7 +91,7 @@ const ManageMenuItems = () => {
 
     const handleDeleteMenuItem = async (id) => {
         try {
-            await fetch(`http://192.168.3.178:8081/api/menu/${id}`, {
+            await fetch(`${EndPoints.DeleteUser}${id}`, {
                 method: 'DELETE',
             });
             setMenuItems(menuItems.filter(item => item.id !== id));

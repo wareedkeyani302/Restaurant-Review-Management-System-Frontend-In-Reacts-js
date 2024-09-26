@@ -10,7 +10,7 @@ const PrivateRoute = ({ element, requiredRole }) => {
     }
 
     if (requiredRole && user.role !== requiredRole) {
-        return <Navigate to="/restaurants" />;
+        return <Navigate to="/home" />;
     }
 
     return element;

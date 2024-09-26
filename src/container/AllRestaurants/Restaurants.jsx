@@ -3,6 +3,7 @@ import MenuModal from '../../components/MenuModal/MenuModal';
 import './Restaurants.css';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../Authentication/AuthContext';
+import EndPoints from '../../shared/DomainUrls';
 
 const Restaurants = () => {
     const [restaurants, setRestaurants] = useState([]);
@@ -17,7 +18,7 @@ const Restaurants = () => {
     useEffect(() => {
         const fetchRestaurants = async () => {
             try {
-                const response = await fetch('http://192.168.3.178:8081/api/all/restaurants');
+                const response = await fetch(EndPoints.AllRestaurant);
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
                 }
@@ -35,7 +36,7 @@ const Restaurants = () => {
         setLoading(true);
         try {
             if (user) {
-                const userMenuResponse = await fetch(`http://192.168.3.178:8081/api/restaurant/${restaurantId}/user/${user.user_id}/menu`);
+                const userMenuResponse = await fetch(`${EndPoints.UserPreferencer}${restaurantId}/user/${user.user_id}/menu`);
 
                 if (userMenuResponse.ok) {
                     const userMenuData = await userMenuResponse.json();
@@ -46,7 +47,7 @@ const Restaurants = () => {
                 }
             }
 
-            const defaultMenuResponse = await fetch(`http://192.168.3.178:8081/api/menu/restaurant/${restaurantId}`);
+            const defaultMenuResponse = await fetch(`${EndPoints.GetMenu}${restaurantId}`);
             if (!defaultMenuResponse.ok) {
                 throw new Error(`Network response was not ok. Status: ${defaultMenuResponse.status}`);
             }
