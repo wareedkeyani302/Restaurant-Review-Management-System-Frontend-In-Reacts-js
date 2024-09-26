@@ -69,7 +69,7 @@ const App = () => {
   const isAdmin = user && user.role === 'admin';
 
   return (
-    <div>
+    <div className='app'>
       {!isLoginPage && !isAdmin && !isRegistrationPage && <Navbar />}
       <Routes>
         <Route
