@@ -35,8 +35,8 @@ const RecomendedMenu = ({ items }) => {
           <div key={item.id} className="recommended-item">
             <img src={`http://192.168.3.178:8081/${item.Image}`} alt={item.Item_name} />
             <h3 className='item-name-heading'>{item.Item_name}</h3>
-            <p>{item.Description}</p>
-            <p>Price: ${item.Price}</p>
+            <p className='item-description'>{item.Description}</p>
+            <p className='item-price'>Price: ${item.Price}</p>
           </div>
         ))}
       </Slider>
