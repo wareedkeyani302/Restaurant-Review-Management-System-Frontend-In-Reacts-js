@@ -1,0 +1,16 @@
+.star-rating {
+    color: #FFD700; 
+}
+
+.star {
+    font-size: 20px; 
+    margin-right: 2px; 
+}
+
+.star.filled {
+    color: #FFD700; 
+}
+
+.star:not(.filled) {
+    color: #ccc; 
+}

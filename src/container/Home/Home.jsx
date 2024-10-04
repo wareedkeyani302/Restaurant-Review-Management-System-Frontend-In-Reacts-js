@@ -4,6 +4,7 @@ import Header from '../Header/Header';
 import RestaurantsCard from '../Restaurant/RestaurantsCard';
 import { useAuth } from '../Authentication/AuthContext';
 import RecomendedMenu from '../Menu/RecomendedMenu';
+import CustomerReviews from '../../components/CustomerReviews/CustomerReviews';
 
 
 const Home = () => {
@@ -32,7 +33,8 @@ const Home = () => {
         {user && user.recommendations && user.recommendations.length > 0 && (
           <RecomendedMenu items = {user.recommendations} />
         )}
-        <RestaurantsCard restaurants ={restaurants} />       
+        <RestaurantsCard restaurants ={restaurants} /> 
+        <CustomerReviews />      
         <Gallery />
     </div>
   )
